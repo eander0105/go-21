@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/eander0105/go-blackjack/blackjack"
+	game "github.com/eander0105/go-21/game"
 )
 
 func main() {
-	game := blackjack.NewGame()
+	game := game.NewGame()
 	game.AddPlayer("Emil")
 
 	game.Play()
