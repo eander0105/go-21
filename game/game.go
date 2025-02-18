@@ -3,6 +3,9 @@ package game
 import (
 	"fmt"
 	"strings"
+
+	. "github.com/eander0105/go-21/deck"
+	. "github.com/eander0105/go-21/player"
 )
 
 type Game struct {
@@ -15,7 +18,7 @@ type Game struct {
 func NewGame() Game {
 	g := Game{}
 
-	g.Deck = NewDeck(true, 4)
+	g.Deck = NewDeck(4, true)
 	g.Dealer = NewDealer()
 
 	return g

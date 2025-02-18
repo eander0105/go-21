@@ -1,9 +1,11 @@
-package game
+package player
 
 import (
 	"slices"
 	"strconv"
 	"strings"
+
+	c "github.com/eander0105/go-21/card"
 )
 
 // Player represents a player in the game
@@ -14,12 +16,12 @@ type Player struct {
 }
 
 type Hand struct {
-	Cards  []Card
+	Cards  []c.Card
 	Bet    float32
 	Locked bool
 }
 
-func (h *Hand) AddCard(c Card) {
+func (h *Hand) AddCard(c c.Card) {
 	h.Cards = append(h.Cards, c)
 }
 
@@ -49,9 +51,9 @@ func (h *Hand) Calculate() (int, bool) {
 			continue
 		}
 
-		if slices.Contains([]string{"Jack", "Queen", "King"}, card.Value) { // Face card
+		if slices.Contains([]c.Value{c.Jack, c.Queen, c.King}, card.Value) { // Face card
 			total += 10
-		} else if card.Value == "Ace" { // Ace
+		} else if card.Value == c.Ace { // Ace
 			if total+11 > 21 {
 				total++
 			} else {
@@ -60,23 +62,23 @@ func (h *Hand) Calculate() (int, bool) {
 			}
 		} else { // Numbered values
 			switch card.Value {
-			case "Two":
+			case c.Two:
 				total += 2
-			case "Three":
+			case c.Three:
 				total += 3
-			case "Four":
+			case c.Four:
 				total += 4
-			case "Five":
+			case c.Five:
 				total += 5
-			case "Six":
+			case c.Six:
 				total += 6
-			case "Seven":
+			case c.Seven:
 				total += 7
-			case "Eight":
+			case c.Eight:
 				total += 8
-			case "Nine":
+			case c.Nine:
 				total += 9
-			case "Ten":
+			case c.Ten:
 				total += 10
 			}
 		}
@@ -107,7 +109,7 @@ func (h Hand) IsBlackJack() bool {
 }
 
 // Hit adds a card to the hand
-func (h *Hand) Hit(c Card) Card {
+func (h *Hand) Hit(c c.Card) c.Card {
 	h.Cards = append(h.Cards, c)
 	return c
 }
