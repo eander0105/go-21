@@ -35,7 +35,7 @@ func (h Hand) String() string {
 	}()
 }
 
-func (h *Hand) Calculate() (int, bool) {
+func (h *Hand) calculate() (int, bool) {
 	var total int
 	var soft bool
 
@@ -86,12 +86,12 @@ func (h *Hand) Calculate() (int, bool) {
 }
 
 func (h *Hand) Value() int {
-	value, _ := h.Calculate()
+	value, _ := h.calculate()
 	return value
 }
 
 func (h *Hand) IsSoft() bool {
-	_, soft := h.Calculate()
+	_, soft := h.calculate()
 	return soft
 }
 
