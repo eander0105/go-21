@@ -3,7 +3,7 @@ package player
 // Player represents a player in the game
 type Player struct {
 	Name    string
-	Hands   []Hand
+	Hands   []Hand // List because of splits etc
 	Credits float32
 }
 
@@ -12,13 +12,6 @@ func NewPlayer(name string) Player {
 		Name:    name,
 		Credits: 100,
 		Hands:   []Hand{},
-	}
-}
-
-func NewDealer() Player {
-	return Player{
-		Name:  "Dealer",
-		Hands: []Hand{},
 	}
 }
 

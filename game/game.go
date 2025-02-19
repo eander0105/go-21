@@ -11,7 +11,7 @@ import (
 type Game struct {
 	Deck        Deck
 	Players     []Player
-	Dealer      Player
+	Dealer      Dealer
 	HouseProfit float32
 }
 

@@ -44,6 +44,7 @@ func (h *Hand) Calculate() (int, bool) {
 			continue
 		}
 
+		// Maybe have the value of the card as a property on the card
 		if slices.Contains([]c.Value{c.Jack, c.Queen, c.King}, card.Value) { // Face card
 			total += 10
 		} else if card.Value == c.Ace { // Ace
