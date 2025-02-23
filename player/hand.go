@@ -106,6 +106,7 @@ func (h Hand) IsBlackJack() bool {
 	return false
 }
 
+// TODO: dont know if this should be here
 // Hit adds a card to the hand
 func (h *Hand) Hit(c c.Card) c.Card {
 	h.Cards = append(h.Cards, c)
