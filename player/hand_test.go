@@ -230,7 +230,7 @@ func TestAddCard(t *testing.T) {
 		Cards: []Card{},
 	}
 
-	hand.AddCard(NewCard(Hearts, Ace))
+	hand.Hit(NewCard(Hearts, Ace))
 	hand.Cards[0].Flip()
 
 	if len(hand.Cards) != 1 {
@@ -245,7 +245,7 @@ func TestAddCard(t *testing.T) {
 		t.Errorf("Expected hand to be soft, but it's not")
 	}
 
-	hand.AddCard(NewCard(Hearts, King))
+	hand.Hit(NewCard(Hearts, King))
 	hand.Cards[1].Flip()
 
 	if hand.Value() != 21 {
@@ -264,7 +264,7 @@ func TestAddCard(t *testing.T) {
 		t.Errorf("Expected true, got false")
 	}
 
-	hand.AddCard(NewCard(Hearts, Queen))
+	hand.Hit(NewCard(Hearts, Queen))
 	hand.Cards[2].Flip()
 
 	if hand.Value() != 21 {
@@ -283,7 +283,7 @@ func TestAddCard(t *testing.T) {
 		t.Errorf("Expected false, got true")
 	}
 
-	hand.AddCard(NewCard(Hearts, Jack))
+	hand.Hit(NewCard(Hearts, Jack))
 	hand.Cards[3].Flip()
 
 	if !hand.IsBusted() {
@@ -330,5 +330,63 @@ func TestString(t *testing.T) {
 	expected = "King of Hearts, Face Down. 10"
 	if hand.String() != expected {
 		t.Errorf("Expected %s, got %s", expected, hand.String())
+	}
+}
+
+func TestIsLocked(t *testing.T) {
+	hand := Hand{
+		Cards: []Card{
+			NewCard(Hearts, Ace),
+			NewCard(Diamonds, King),
+		},
+	}
+	flipAllCards(&hand)
+
+	if hand.Locked {
+		t.Errorf("Expected false, got true")
+	}
+
+	hand.Stand()
+
+	if !hand.Locked {
+		t.Errorf("Expected true, got false")
+	}
+}
+
+func TestHitAndStand(t *testing.T) {
+	hand := Hand{
+		Cards: []Card{},
+	}
+
+	hand.Hit(NewCard(Hearts, Ace))
+	hand.Hit(NewCard(Diamonds, King))
+	flipAllCards(&hand)
+
+	if hand.Value() != 21 {
+		t.Errorf("Expected hand value to be 21, but it's %d", hand.Value())
+	}
+
+	if hand.Locked {
+		t.Errorf("Expected false, got true")
+	}
+
+	hand.Stand()
+
+	if !hand.Locked {
+		t.Errorf("Expected true, got false")
+	}
+
+	hand.Hit(NewCard(Hearts, King))
+
+	if len(hand.Cards) != 2 {
+		t.Errorf("Expected hand to have 2 cards, but it has %d", len(hand.Cards))
+	}
+
+	if hand.Value() != 21 {
+		t.Errorf("Expected hand value to be 21, but it's %d", hand.Value())
+	}
+
+	if !hand.Locked {
+		t.Errorf("Expected false, got true")
 	}
 }
