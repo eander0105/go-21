@@ -21,6 +21,6 @@ func (c Card) String() string {
 	return "Face Down"
 }
 
-func (c Card) Flip() {
+func (c *Card) Flip() {
 	c.FaceUp = !c.FaceUp
 }
