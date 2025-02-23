@@ -149,3 +149,27 @@ func TestCalculateHandValueMultipleCards(t *testing.T) {
 		t.Errorf("Expected hand to be hard, but it's soft")
 	}
 }
+
+func TestIsBusted(t *testing.T) {
+	hand := Hand{
+		Cards: []Card{
+			NewCard(Hearts, Ace),
+			NewCard(Diamonds, King),
+		},
+	}
+	flipAllCards(&hand)
+
+	if hand.IsBusted() {
+		t.Errorf("Expected false, got true")
+	}
+
+	hand = Hand{
+		Cards: []Card{
+			NewCard(Hearts, King),
+			NewCard(Diamonds, King),
+			NewCard(Clubs, King),
+		},
+	}
+	flipAllCards(&hand)
+
+}

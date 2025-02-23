@@ -95,6 +95,10 @@ func (h *Hand) IsSoft() bool {
 	return soft
 }
 
+func (h *Hand) IsBusted() bool {
+	return h.Value() > 21
+}
+
 func (h Hand) IsBlackJack() bool {
 	if len(h.Cards) == 2 && h.Value() == 21 {
 		return true
