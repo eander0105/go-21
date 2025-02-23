@@ -14,6 +14,10 @@ type Hand struct {
 	Locked bool
 }
 
+func (h *Hand) AddCard(c c.Card) {
+	h.Cards = append(h.Cards, c)
+}
+
 func (h Hand) String() string {
 	cards := strings.Join(func() []string {
 		cStr := make([]string, len(h.Cards))
@@ -106,7 +110,7 @@ func (h Hand) IsBlackJack() bool {
 // Hit adds a card to the hand
 func (h *Hand) Hit(c c.Card) {
 	if !h.Locked {
-		h.Cards = append(h.Cards, c)
+		h.AddCard(c)
 	}
 }
 
