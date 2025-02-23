@@ -172,4 +172,7 @@ func TestIsBusted(t *testing.T) {
 	}
 	flipAllCards(&hand)
 
+	if !hand.IsBusted() {
+		t.Errorf("Expected true, got false")
+	}
 }
