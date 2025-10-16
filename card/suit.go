@@ -16,6 +16,17 @@ var suitNames = map[Suit]string{
 	Spades:   "Spades",
 }
 
+var suitASCII = map[Suit]string{
+	Hearts:   "♥",
+	Diamonds: "♦",
+	Clubs:    "♣",
+	Spades:   "♠",
+}
+
 func (s Suit) String() string {
 	return suitNames[s]
+}
+
+func (s Suit) ASCII() string {
+	return suitASCII[s]
 }

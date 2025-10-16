@@ -36,11 +36,11 @@ func (g *Game) Play() {
 }
 
 func (g *Game) PlayRound() {
-
 	for i := range g.Players {
 		player := &g.Players[i]
 		player.PlaceBet(10)
 	}
+
 	g.Dealer.PlaceBet(0) // arbitrary bet
 
 	g.Deal()
@@ -81,6 +81,10 @@ func (g *Game) PlayRound() {
 		}
 	}
 	g.EndRound()
+}
+
+func (g *Game) InitalDeal() {
+
 }
 
 func (g *Game) EndRound() {
